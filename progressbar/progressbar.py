@@ -95,7 +95,7 @@ class ProgressBar(object):
     _DEFAULT_WIDGETS = [widgets.Percentage(), ' ', widgets.Bar()]
 
     def __init__(self, maxval=None, widgets=None, term_width=None, poll=1,
-                 left_justify=True, fd=sys.stderr):
+                 left_justify=True, fd=sys.stdout):
         """Initializes a progress bar with sane defaults."""
 
         # Don't share a reference with any other progress bars
@@ -260,7 +260,7 @@ class ProgressBar(object):
         now = time.time()
         self.seconds_elapsed = now - self.start_time
         self.next_update = self.currval + self.update_interval
-        self.fd.write(self._format_line() + '\r')
+        self.fd.write('\r' + self._format_line())
         self.fd.flush()
         self.last_update_time = now
 
